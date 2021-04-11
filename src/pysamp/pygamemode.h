@@ -1,10 +1,10 @@
-#ifndef PYGAMEMODE_H
-#define PYGAMEMODE_H
+#pragma once
 
 #include <Python.h>
 #include "sampgdk.h"
 #include <stdexcept>
 #include "samp.h"
+#include "native.h"
 
 #ifdef DEBUG
 #define PY_DEBUG
@@ -30,10 +30,14 @@ private:
 	bool loaded = false;
 	bool disabled = false;
 	const char* path;
+	static std::map<const char*, AMX_NATIVE> natives;
+	static PyMethodDef Py_methods[];
+
 public:
 	PyGamemode(const char* apath);
 	~PyGamemode();
 	bool callback(const char* name , PyObject* pArgs, bool obtainLock);
+	bool hasCallback(const char* name);
 	void load();
 	void reload();
 	void unload();
@@ -41,5 +45,3 @@ public:
 	void disable();
 	bool isEnabled();
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef PYSAMP_H
-#define PYSAMP_H
+#pragma once
 
 #if PY_TEST == 0
 	#ifdef WIN32
@@ -23,19 +22,16 @@
 class PySAMP
 {
 private:
-	static PyGamemode* gamemode;
+	static PyGamemode *gamemode;
 public:
 	static void load();
 	static void reload();
 	static void unload();
 	static void disable();
+	static bool hasCallback(const char* name);
 	static bool callback(const char* name, PyObject * pArgs);
 	static bool callback(const char* name, PyObject * pArgs, bool obtainLock);
 	static bool isInitialized();
 	static bool isLoaded();
 	static bool isEnabled();
 };
-
-
-
-#endif // PYSAMP_H
